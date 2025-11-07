@@ -16,6 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('contenu');
             $table->date('date');
+            $table->foreignId('employe_id')->constrained()->onDelete('cascade');
+            $table->foreignId('notification_id')->constrained()->onDelete('cascade');
+
         });
     }
 

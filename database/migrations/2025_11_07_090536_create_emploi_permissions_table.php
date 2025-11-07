@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('message');
+            $table->foreignId('employe_id')->constrained()->onDelete('cascade');
+            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
         });
     }
 
