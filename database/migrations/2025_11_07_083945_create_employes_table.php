@@ -22,9 +22,12 @@ return new class extends Migration
             $table->string('genre');
             $table->string('etat_civil');
             $table->string('numero');
-            $table->string('adress');
+            $table->string('adresse');
             $table->string('password');
-            $table->string('fonction');
+            $table->string('role');
+            $table->string('date_naissance');
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+
         });
     }
 

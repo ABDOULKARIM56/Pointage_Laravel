@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Departement extends Model
 {
     //
-    public function employe() {
-        return $this->hasMany(Employe::class,'employe_id', 'id');
+    public function service() {
+        return $this->hasMany(Service::class,'departement_id', 'id');
     }
 }

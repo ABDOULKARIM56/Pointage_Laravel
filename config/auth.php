@@ -38,8 +38,16 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            // 'provider' => 'users',
+            'provider' => 'employes',
         ],
+      
+
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'employes',
+        'hash' => false,
+    ],
     ],
 
     /*
@@ -60,11 +68,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => env('AUTH_MODEL', App\Models\User::class),
+        // ],
+    'employes' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Employe::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

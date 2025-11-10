@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pointage extends Model
 {
     //
-     public function pointage()
+     public function employe()
     {
-        return $this->belongsTo(Pointage::class);
+        return $this->belongsTo(Employe::class);
     }
 }
