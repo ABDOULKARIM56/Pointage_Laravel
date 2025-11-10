@@ -15,7 +15,7 @@ class EmployeAuthController extends Controller
          //
         //connexion
     $user = Auth::user();
-
+        
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $employe = Auth::user();
         return response()->json(['message' => 'Connecté', 'employe' => $employe]);
