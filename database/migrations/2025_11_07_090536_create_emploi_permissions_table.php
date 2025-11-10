@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emploi_permissions', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->timestamps();
             $table->date('date_debut');
             $table->date('date_fin');
