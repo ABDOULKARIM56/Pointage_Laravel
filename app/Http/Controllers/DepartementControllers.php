@@ -37,7 +37,7 @@ class DepartementControllers extends Controller
 
         Departement::create($request->all());
 
-        return redirect()->route('departement.ShowDepartement')
+        return redirect()->route('show_departement')
                          ->with('success', 'Département ajouté avec succès !');
     }
 
@@ -67,7 +67,7 @@ class DepartementControllers extends Controller
 
         $departement->update($request->all());
 
-        return redirect()->route('departement.ShowDepartement')
+        return redirect()->route('show_departement')
                          ->with('success', 'Département mis à jour avec succès !');
     }
 
@@ -77,7 +77,7 @@ class DepartementControllers extends Controller
         $departement = Departement::findOrFail($id);
         $departement->delete();
 
-        return redirect()->route('departement.ShowDepartement')
+        return redirect()->route('show_departement')
                          ->with('success', 'Département supprimé avec succès !');
     }
 }

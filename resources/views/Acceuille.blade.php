@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    {{ $employe }}
+    {{ $user }}
     <form action="{{ route('deconnexion') }}" method="POST" class="bg-white p-4 rounded shadow">
                 @csrf
                 <button type="submit">Deconnecter</button>
