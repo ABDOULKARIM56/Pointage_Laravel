@@ -15,12 +15,12 @@ class ServiceController extends Controller
     {
         $query = Service::with('departement'); // Charge les infos du département associé
 
-        // 🔍 Filtrer par nom de service si précisé
+        //  Filtrer par nom de service si précisé
         if ($request->has('nom') && !empty($request->nom)) {
             $query->where('nom', 'like', '%' . $request->nom . '%');
         }
 
-        // 🔍 Filtrer par département si précisé
+        //  Filtrer par département si précisé
         if ($request->has('departement_id') && !empty($request->departement_id)) {
             $query->where('departement_id', $request->departement_id);
         }
@@ -44,13 +44,13 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        // ✅ Validation du formulaire
+        //  Validation du formulaire
         $request->validate([
             'nom' => 'required|string|max:255',
             'departement_id' => 'required|exists:departements,id',
         ]);
 
-        // ✅ Enregistrement
+        //  Enregistrement
         Service::create($request->all());
 
         return redirect()->route('service.index')->with('success', 'Service ajouté avec succès.');
