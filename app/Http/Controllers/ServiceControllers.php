@@ -2,63 +2,103 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 
 class ServiceControllers extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche la liste de tous les services.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Service::with('departement'); // Charge les infos du département associé
+
+        //  Filtrer par nom de service si précisé
+        if ($request->has('nom') && !empty($request->nom)) {
+            $query->where('nom', 'like', '%' . $request->nom . '%');
+        }
+
+        //  Filtrer par département si précisé
+        if ($request->has('departement_id') && !empty($request->departement_id)) {
+            $query->where('departement_id', $request->departement_id);
+        }
+
+        $services = $query->get();
+        foreach ($services as $service) {
+            $service->nom;
+            $service->departement_id=Departement::findOrFail($service->departement_id);
+        }
+        return view('service.showService', compact('services'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire de création d’un service.
      */
     public function create()
     {
-        //
+        $departements = Departement::all(); // Pour choisir le département
+        return view('service.createService', compact('departements'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Enregistre un nouveau service dans la base.
      */
     public function store(Request $request)
     {
-        //
+        //  Validation du formulaire
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'departement_id' => 'required|exists:departements,id',
+        ]);
+
+        //  Enregistrement
+        Service::create($request->all());
+
+        return redirect()->route('show_service')->with('success', 'Service ajouté avec succès.');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche les détails d’un service.
      */
-    public function show(string $id)
+    public function show(Service $service)
     {
-        //
+        $service->load('departement'); // Charge les infos du département lié
+        return view('service.showService', compact('service'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire d’édition d’un service existant.
      */
-    public function edit(string $id)
+    public function edit(Service $service)
     {
-        //
+        $departements = Departement::all();
+        return view('service.editservice', compact('service', 'departements'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour les informations d’un service.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'departement_id' => 'required|exists:departements,id',
+        ]);
+
+        $service->update($request->all());
+
+        return redirect()->route('show_service')->with('success', 'Service modifié avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un service.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return redirect()->route('show_service')->with('success', 'Service supprimé avec succès.');
     }
 }

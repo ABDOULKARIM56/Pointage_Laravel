@@ -2,63 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionControllers extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+     //  Afficher la liste des Permissions avec possibilité de recherche
+    public function index(Request $request)
     {
-        //
+        $query = Permission::query();
+
+        if ($request->has('type') && !empty($request->type)) {
+            $query->where('type', 'like', '%' . $request->type . '%');
+        }
+
+        $permissions = $query->get();
+
+        return view('permission.ShowPermission', compact('permissions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //  Afficher le formulaire pour créer un nouveau Permission
     public function create()
     {
-        //
+        return view('permission.CreatePermission');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //  Enregistrer un nouveau Permission
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|max:255|unique:permissions,type',
+        ]);
+
+        Permission::create($request->all());
+
+        return redirect()->route('show_permission')
+                         ->with('success', 'Permission ajouté avec succès !');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //  Afficher un Permission spécifique
+    public function show($id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        return view('permission.ShowPermission', compact('permission'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    //  Afficher le formulaire pour éditer un Permission
+    public function edit($id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        return view('permission.EditPermission', compact('permission'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    //  Mettre à jour un Permission existant
+    public function update(Request $request, $id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+
+        $request->validate([
+            'type' => 'required|string|max:255|unique:permissions,type,' . $permission->id,
+        ]);
+
+        $permission->update($request->all());
+
+        return redirect()->route('show_permission')
+                         ->with('success', 'Permission mis à jour avec succès !');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    //  Supprimer un Permission
+    public function destroy($id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        $permission->delete();
+
+        return redirect()->route('show_permission')
+                         ->with('success', 'Permission supprimé avec succès !');
     }
 }

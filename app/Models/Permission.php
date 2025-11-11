@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Permission extends Model
 {
+    protected $fillable = [
+        'type',
+    ];
     //
      use HasFactory;
     public function emploiPermission() {

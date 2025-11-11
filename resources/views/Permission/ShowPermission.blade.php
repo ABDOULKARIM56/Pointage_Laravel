@@ -7,40 +7,38 @@
 </head>
 <body>
 
-    <h2>Liste des Service</h2>
-     <form action="{{ route('create_servi') }}" method="GET" class="bg-white p-4 rounded shadow">
+    <h2>Liste des Permission</h2>
+     <form action="{{ route('create_permi') }}" method="GET" class="bg-white p-4 rounded shadow">
             @csrf
             
             <button type="submit">Ajouter</button>
         </form>
-       <form method="GET" action="{{ route('show_service') }}" class="mb-4 flex gap-2">
-            <input type="text" name="nom" placeholder="Rechercher par nom" value="{{ request('nom') }}" class="border rounded p-2 flex-1" />
+        <form method="GET" action="{{ route('show_permission') }}" class="mb-4 flex gap-2">
+            <input type="text" name="type" placeholder="Rechercher par type" value="{{ request('type') }}" class="border rounded p-2 flex-1" />
             <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Rechercher</button>
         </form>
     <table border="1" cellpadding="6" cellspacing="0">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nom</th>
-            <th>Departement</th>
+            <th>Type</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($services as $servi)
+        @foreach ($permissions as $permi)
             <tr>
-                <td>{{ $servi->id }}</td>
-                <td>{{ $servi->nom }}</td>
-                <td>{{ $servi->departement_id->nom }}</td>
+                <td>{{ $permi->id }}</td>
+                <td>{{ $permi->type }}</td>
                 <td>
                     <!-- Formulaire de modification -->
-                    <form action="{{ route('edit_servi',['service' => $servi]) }}" method="GET" style="display:inline;">
+                    <form action="{{ route('edit_permi',['id' => $permi->id]) }}" method="GET" style="display:inline;">
                         @csrf
                         <button type="submit">Modifier</button>
                     </form>
 
                     <!-- Formulaire de suppression -->
-                    <form action="{{ route('suppression_servi', ['service' => $servi]) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('suppression_permi', ['id' => $permi->id]) }}" method="POST" style="display:inline;">
                         @csrf
                         <button type="submit" style="color:red;">Supprimer</button>
                     </form>

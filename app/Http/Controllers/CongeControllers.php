@@ -2,63 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conge;
 use Illuminate\Http\Request;
 
 class CongeControllers extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+     //  Afficher la liste des conges avec possibilité de recherche
+    public function index(Request $request)
     {
-        //
+        $query = Conge::query();
+
+        if ($request->has('type') && !empty($request->type)) {
+            $query->where('type', 'like', '%' . $request->type . '%');
+        }
+
+        $conges = $query->get();
+
+        return view('conge.Showconge', compact('conges'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //  Afficher le formulaire pour créer un nouveau conge
     public function create()
     {
-        //
+        return view('conge.Createconge');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //  Enregistrer un nouveau conge
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|max:255|unique:conges,type',
+        ]);
+
+        Conge::create($request->all());
+
+        return redirect()->route('show_conge')
+                         ->with('success', 'conge ajouté avec succès !');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //  Afficher un conge spécifique
+    public function show($id)
     {
-        //
+        $conge = Conge::findOrFail($id);
+        return view('conge.Showconge', compact('conge'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    //  Afficher le formulaire pour éditer un conge
+    public function edit($id)
     {
-        //
+        $conge = Conge::findOrFail($id);
+        return view('conge.Editconge', compact('conge'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    //  Mettre à jour un conge existant
+    public function update(Request $request, $id)
     {
-        //
+        $conge = Conge::findOrFail($id);
+
+        $request->validate([
+            'type' => 'required|string|max:255|unique:conges,type,' . $conge->id,
+        ]);
+
+        $conge->update($request->all());
+
+        return redirect()->route('show_conge')
+                         ->with('success', 'conge mis à jour avec succès !');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    //  Supprimer un conge
+    public function destroy($id)
     {
-        //
+        $conge = Conge::findOrFail($id);
+        $conge->delete();
+
+        return redirect()->route('show_conge')
+                         ->with('success', 'conge supprimé avec succès !');
     }
 }
