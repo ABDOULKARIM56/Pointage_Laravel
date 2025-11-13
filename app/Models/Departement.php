@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Departement extends Model
 {
     //
+
+    protected $fillable = [
+        'nom',
+        'description',
+    ];
     public function service() {
         return $this->hasMany(Service::class,'departement_id', 'id');
     }

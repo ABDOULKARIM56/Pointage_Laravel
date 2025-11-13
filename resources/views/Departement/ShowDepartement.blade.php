@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Départements</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        /* En-têtes du tableau */
+        th {
+            background-color: #2196F3 !important;
+            color: white !important;
+            text-align: center;
+        }
+
+        /* Alternance des couleurs de lignes */
+        tr:nth-child(even) {
+            background-color: #ffffff !important;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #F3F3F3 !important;
+        }
+
+        /* Effet au survol */
+        tr:hover {
+            background-color: #E3F2FD !important;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Tableau avec un peu d’arrondi et d’ombre */
+        table {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Boutons d’action : plus petits et arrondis */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+        }
+
+        .btn-action i {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-light p-4">
+    <div class="container">
+
+        <!-- Titre -->
+        <h2 class="mb-4">Liste des Départements</h2>
+
+        <!-- Barre recherche + bouton Ajouter -->
+        <div class="d-flex mb-4 gap-2">
+            <!-- Recherche -->
+            <form method="GET" action="{{ route('show_departement') }}" class="flex-grow-1 d-flex" id="searchForm">
+                <input 
+                    type="text" 
+                    name="nom" 
+                    placeholder="🔍 Rechercher un département..." 
+                    value="{{ request('nom') }}" 
+                    class="form-control" 
+                    id="searchInput"
+                />
+            </form>
+
+            <!-- Ajouter -->
+            <form action="{{ route('create_depart') }}" method="GET">
+                @csrf
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-plus-circle"></i> Ajouter
+                </button>
+            </form>
+        </div>
+
+        <!-- Tableau -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover bg-white">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($departements as $depart)
+                        <tr>
+                            <td>{{ $depart->id }}</td>
+                            <td>{{ $depart->nom }}</td>
+                            <td>{{ $depart->description }}</td>
+                            <td class="d-flex gap-2 justify-content-center">
+
+                                <!-- Détail -->
+                                <form action="{{ route('detail', ['detail' => $depart, 'model' => 'show_depart']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn btn-info btn-sm btn-action text-white">
+                                        <i class="bi bi-eye"></i> Détail
+                                    </button>
+                                </form>
+
+                                <!-- Modifier -->
+                                <form action="{{ route('edit_depart',['id' => $depart->id]) }}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
+                                        <i class="bi bi-pencil-square"></i> Modifier
+                                    </button>
+                                </form>
+
+                                <!-- Supprimer -->
+                                <form action="{{ route('suppression_depart', ['id' => $depart->id]) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm btn-action">
+                                        <i class="bi bi-trash3"></i> Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-3">
+            {{ $departements->links() }}
+        </div>
+
+    </div>
+
+    <!-- Script : recherche automatique -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchForm = document.getElementById('searchForm');
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                searchForm.submit();
+            }, 500); // 0,5s après la dernière frappe
+        });
+    </script>
+</body>
+</html>
