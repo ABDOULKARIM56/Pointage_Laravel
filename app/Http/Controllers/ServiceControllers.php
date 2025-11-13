@@ -11,29 +11,58 @@ class ServiceControllers extends Controller
     /**
      * Affiche la liste de tous les services.
      */
+    // public function index(Request $request)
+    // {
+    //     $query = Service::with('departement'); // Charge les infos du département associé
+
+    //    $filters = ['nom', 'departement_id'];
+
+    //     $query->where(function ($q) use ($request, $filters) {
+    //         foreach ($filters as $field) {
+    //             if ($request->has('nom') && !empty($request->nom)) {
+    //                 $q->orWhere($field, 'like', '%' . $request->nom . '%');
+    //             }
+    //         }
+    //     })->distinct();
+
+    //     $services = $query->get();
+    //     $liste=[];
+    //     foreach ($services as $service) {
+    //         $service->nom=$service->nom;
+    //         $service->departement_id=Departement::findOrFail($service->departement_id);
+    //     }
+    //     return view('service.showService', compact('services'));
+    // }
+
+
+      /**
+     * Affiche la liste de tous les services avec filtres (nom service ou nom département)
+     */
     public function index(Request $request)
     {
-        $query = Service::with('departement'); // Charge les infos du département associé
+        // On charge la relation departement
+        $query = Service::with('departement');
 
-       $filters = ['nom', 'departement_id'];
+        // Filtrage
+        $nom = $request->input('nom'); // terme de recherche
 
-        $query->where(function ($q) use ($request, $filters) {
-            foreach ($filters as $field) {
-                if ($request->has('nom') && !empty($request->nom)) {
-                    $q->orWhere($field, 'like', '%' . $request->nom . '%');
-                }
-            }
-        })->distinct();
-
-        $services = $query->get();
-        $liste=[];
-        foreach ($services as $service) {
-            $service->nom=$service->nom;
-            $service->departement_id=Departement::findOrFail($service->departement_id);
+        if (!empty($nom)) {
+            $query->where(function ($q) use ($nom) {
+                // Recherche par nom du service
+                $q->where('nom', 'like', "%$nom%")
+                  // OU par nom du département lié
+                  ->orWhereHas('departement', function ($subQuery) use ($nom) {
+                      $subQuery->where('nom', 'like', "%$nom%");
+                  });
+            });
         }
+
+        // Récupération des services
+        // $services = $query->get();
+        $services = $query->paginate(1);
+        // Retour à la vue
         return view('service.showService', compact('services'));
     }
-
     /**
      * Affiche le formulaire de création d’un service.
      */

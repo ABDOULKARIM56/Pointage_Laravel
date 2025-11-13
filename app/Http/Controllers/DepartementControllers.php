@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class DepartementControllers extends Controller
 {
     //  Afficher la liste des départements avec possibilité de recherche
-    public function index(Request $request)
+    
+  public function index(Request $request)
     {
         $query = Departement::query();
 

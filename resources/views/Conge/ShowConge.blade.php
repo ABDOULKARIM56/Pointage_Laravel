@@ -8,15 +8,36 @@
 <body>
 
     <h2>Liste des conge</h2>
-     <form action="{{ route('create_cong') }}" method="GET" class="bg-white p-4 rounded shadow">
+     
+
+
+        <form method="GET" action="{{ route('show_conge') }}" class="mb-4 d-flex gap-2" id="searchForm">
+        <input 
+            type="text" 
+            name="type" 
+            placeholder="Rechercher"
+            value="{{ request('type') }}" 
+            class="form-control " 
+            id="searchInput"
+        />
+            <!-- c<button type="submit" class="btn btn-primary">Rechercher</button> -->
+        </form>
+        <form action="{{ route('create_cong') }}" method="GET" class="bg-white p-4 rounded shadow">
             @csrf
             
-            <button type="submit">Ajouter</button>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
-        <form method="GET" action="{{ route('show_conge') }}" class="mb-4 flex gap-2">
-            <input type="text" name="type" placeholder="Rechercher par type" value="{{ request('type') }}" class="border rounded p-2 flex-1" />
-            <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Rechercher</button>
-        </form>
+        <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            // Petite temporisation pour éviter de spammer le serveur à chaque frappe
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                document.getElementById('searchForm').submit();
+            }, 500); // attend 0,5 seconde après la dernière frappe
+        });
+        </script>
+
+                
     <table border="1" cellpadding="6" cellspacing="0">
     <thead>
         <tr>
