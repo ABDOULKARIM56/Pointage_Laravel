@@ -3,6 +3,7 @@
 use App\Http\Controllers\CongeControllers;
 use App\Http\Controllers\EmployeAuthController;
 use App\Http\Controllers\DepartementControllers;
+use App\Http\Controllers\Details;
 use App\Http\Controllers\PermissionControllers;
 use App\Http\Controllers\ServiceControllers;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +11,14 @@ use Illuminate\Support\Facades\Route;
  Route::get('/', function () {
     return view('Auth');
 });
- 
+
+//  Route::get('/detail/detail/{detail}', function () {
+//     return view('detail.detail');
+// });
+// detail
+Route::get('/detail/detail/{detail}/{model}', action: [Details::class, 'show_depart'])->name('detail');
+
+
 // authentification
 Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
 Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');

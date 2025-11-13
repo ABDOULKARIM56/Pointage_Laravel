@@ -12,11 +12,23 @@ class DepartementControllers extends Controller
     {
         $query = Departement::query();
 
-        if ($request->has('nom') && !empty($request->nom)) {
-            $query->where('nom', 'like', '%' . $request->nom . '%');
-        }
+        // if ($request->has('nom') && !empty($request->nom)) {
+        //     $query->where('nom', 'like', '%' . $request->nom . '%');
+        // }
+       $filters = ['nom', 'description'];
 
-        $departements = $query->get();
+        $query->where(function ($q) use ($request, $filters) {
+            foreach ($filters as $field) {
+                if ($request->has('nom') && !empty($request->nom)) {
+                    $q->orWhere($field, 'like', '%' . $request->nom . '%');
+                }
+            }
+        })->distinct();
+
+
+        // $departements = $query->get();
+        $departements = $query->paginate(2);
+
 
         return view('departement.ShowDepartement', compact('departements'));
     }

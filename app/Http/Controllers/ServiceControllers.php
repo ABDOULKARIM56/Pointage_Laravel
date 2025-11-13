@@ -15,19 +15,20 @@ class ServiceControllers extends Controller
     {
         $query = Service::with('departement'); // Charge les infos du département associé
 
-        //  Filtrer par nom de service si précisé
-        if ($request->has('nom') && !empty($request->nom)) {
-            $query->where('nom', 'like', '%' . $request->nom . '%');
-        }
+       $filters = ['nom', 'departement_id'];
 
-        //  Filtrer par département si précisé
-        if ($request->has('departement_id') && !empty($request->departement_id)) {
-            $query->where('departement_id', $request->departement_id);
-        }
+        $query->where(function ($q) use ($request, $filters) {
+            foreach ($filters as $field) {
+                if ($request->has('nom') && !empty($request->nom)) {
+                    $q->orWhere($field, 'like', '%' . $request->nom . '%');
+                }
+            }
+        })->distinct();
 
         $services = $query->get();
+        $liste=[];
         foreach ($services as $service) {
-            $service->nom;
+            $service->nom=$service->nom;
             $service->departement_id=Departement::findOrFail($service->departement_id);
         }
         return view('service.showService', compact('services'));
