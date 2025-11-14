@@ -56,7 +56,7 @@
 
 <div class="container">
     <div class="card p-4 bg-white">
-        <h2>Modifier un Congé</h2>
+        <h2 style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Modifier un Congé</h2>
 
         <form action="{{ route('modification_cong',['id' => $conge->id]) }}" method="POST">
             @csrf

@@ -9,7 +9,7 @@
     <!-- Icônes Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <style>
+     <style>
         /* En-têtes du tableau */
         th {
             background-color: #2196F3 !important;
@@ -17,29 +17,30 @@
             text-align: center;
         }
 
-        /* Alternance des couleurs de lignes */
-        tr:nth-child(even) {
-            background-color: #ffffff !important;
-        }
+              /* Alternance correcte des lignes */
+.table tbody tr:nth-child(odd) td {
+    background-color: #F3F3F3 !important;
+}
 
-        tr:nth-child(odd) {
-            background-color: #F3F3F3 !important;
-        }
+.table tbody tr:nth-child(even) td {
+    background-color: #ffffff !important;
+}
 
-        /* Effet au survol */
-        tr:hover {
-            background-color: #E3F2FD !important;
-            transition: background-color 0.2s ease;
-        }
+/* Survol */
+.table-hover tbody tr:hover td {
+    background-color: #1e6104ff !important;
+    color: white !important;
+    transition: 0.2s;
+}
 
-        /* Tableau arrondi + ombre légère */
+        /* Tableau avec un peu d’arrondi et d’ombre */
         table {
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Boutons d’action */
+        /* Boutons d’action : plus petits et arrondis */
         .btn-action {
             display: inline-flex;
             align-items: center;
@@ -60,7 +61,7 @@
     <div class="container">
 
         <!-- Titre -->
-        <h2 class="mb-4">Liste des Permissions</h2>
+        <h2 class="mb-4 text-center" style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Permissions</h2>
 
         <!-- Barre recherche + bouton Ajouter -->
         <div class="d-flex mb-4 gap-2">
@@ -102,19 +103,13 @@
                             <td>{{ $permi->type }}</td>
                             <td class="d-flex gap-2 justify-content-center">
 
-                                <!-- Détail -->
-                                <form action="{{ route('detail', ['detail' => $permi, 'model' => 'show_permission']) }}" method="GET">
-                                    @csrf
-                                    <button type="submit" class="btn btn-info btn-sm btn-action text-white">
-                                        <i class="bi bi-eye"></i> Détail
-                                    </button>
-                                </form>
+                             
 
                                 <!-- Modifier -->
                                 <form action="{{ route('edit_permi', ['id' => $permi->id]) }}" method="GET">
                                     @csrf
                                     <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
-                                        <i class="bi bi-pencil-square"></i> Modifier
+                                        <i class="bi bi-pencil-square"></i> 
                                     </button>
                                 </form>
 
@@ -122,7 +117,7 @@
                                 <form action="{{ route('suppression_permi', ['id' => $permi->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette permission ?');">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm btn-action">
-                                        <i class="bi bi-trash3"></i> Supprimer
+                                        <i class="bi bi-trash3"></i> 
                                     </button>
                                 </form>
                             </td>
@@ -133,7 +128,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-3">
+        <div class="mt-3">
             {{ $permissions->links() }}
         </div>
 

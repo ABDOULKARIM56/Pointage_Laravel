@@ -28,7 +28,7 @@ class DepartementControllers extends Controller
 
 
         // $departements = $query->get();
-        $departements = $query->paginate(2);
+        $departements = $query->paginate(5);
 
 
         return view('departement.ShowDepartement', compact('departements'));

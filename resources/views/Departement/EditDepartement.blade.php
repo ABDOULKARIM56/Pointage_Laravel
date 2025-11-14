@@ -56,7 +56,7 @@
 
 <div class="container">
     <div class="card p-4 bg-white">
-        <h2>Modifier un Département</h2>
+        <h2 style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Modifier un Département</h2>
 
         <form action="{{ route('modification_depart',['id' => $departement->id]) }}" method="POST">
             @csrf

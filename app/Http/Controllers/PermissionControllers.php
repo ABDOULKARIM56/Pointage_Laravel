@@ -17,7 +17,7 @@ class PermissionControllers extends Controller
         }
 
         // $permissions = $query->get();
-         $permissions = $query->paginate(2);
+         $permissions = $query->paginate(5);
 
         return view('permission.ShowPermission', compact('permissions'));
     }

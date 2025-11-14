@@ -17,7 +17,7 @@ class CongeControllers extends Controller
         }
 
         // $conges = $query->get();
-        $conges = $query->paginate(2);
+        $conges = $query->paginate(5);
 
         
 

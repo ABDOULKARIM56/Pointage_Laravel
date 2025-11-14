@@ -8,7 +8,8 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* En-têtes du tableau */
         th {
@@ -17,20 +18,8 @@
             text-align: center;
         }
 
-        /* Alternance des couleurs de lignes */
-        tr:nth-child(even) {
-            background-color: #ffffff !important;
-        }
 
-        tr:nth-child(odd) {
-            background-color: #F3F3F3 !important;
-        }
 
-        /* Effet au survol */
-        tr:hover {
-            background-color: #E3F2FD !important;
-            transition: background-color 0.2s ease;
-        }
 
         /* Tableau avec un peu d’arrondi et d’ombre */
         table {
@@ -60,10 +49,10 @@
     <div class="container">
 
         <!-- Titre -->
-        <h2 class="mb-4">Liste des Départements</h2>
+        <h2 class="mb-4 text-center" style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Départements</h2>
 
         <!-- Barre recherche + bouton Ajouter -->
-        <div class="d-flex mb-4 gap-2">
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <!-- Recherche -->
             <form method="GET" action="{{ route('show_departement') }}" class="flex-grow-1 d-flex" id="searchForm">
                 <input 
@@ -108,7 +97,7 @@
                                 <form action="{{ route('detail', ['detail' => $depart, 'model' => 'show_depart']) }}" method="GET">
                                     @csrf
                                     <button type="submit" class="btn btn-info btn-sm btn-action text-white">
-                                        <i class="bi bi-eye"></i> Détail
+                                        <i title="Détail" class="bi bi-eye"></i> 
                                     </button>
                                 </form>
 
@@ -116,7 +105,7 @@
                                 <form action="{{ route('edit_depart',['id' => $depart->id]) }}" method="GET">
                                     @csrf
                                     <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
-                                        <i class="bi bi-pencil-square"></i> Modifier
+                                        <i title="Modifier" class="bi bi-pencil-square"></i> 
                                     </button>
                                 </form>
 
@@ -124,7 +113,7 @@
                                 <form action="{{ route('suppression_depart', ['id' => $depart->id]) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm btn-action">
-                                        <i class="bi bi-trash3"></i> Supprimer
+                                        <i title="Supprimer" class="bi bi-trash3"></i> 
                                     </button>
                                 </form>
                             </td>
@@ -134,8 +123,8 @@
             </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-3">
+        <!-- Pagination d-flex justify-content-center  -->
+        <div class="mt-3">
             {{ $departements->links() }}
         </div>
 

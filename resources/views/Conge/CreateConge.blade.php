@@ -57,7 +57,7 @@
 
 <div class="container">
     <div class="card p-4 bg-white">
-        <h2>Ajouter un Congé</h2>
+        <h2 style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Ajouter un Congé</h2>
 
         <form action="{{ route('ajouter_conge') }}" method="POST">
             @csrf
