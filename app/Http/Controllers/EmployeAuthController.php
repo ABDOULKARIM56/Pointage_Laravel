@@ -40,12 +40,39 @@ class EmployeAuthController extends Controller
     }
 
 
-     public function deconnexion(Request $request)
+    /*  public function deconnexion(Request $request)
     {
-        $user = Auth::user();
+        return view('/employe/authentification', compact('user'));
+       // $user = Auth::user();
     if (Auth::attempt(['email'=> $request->email,'password'=> $request->password])) {       
     // deconnexion
+    
     Auth::logout();
     }
    
-}}
+    } */
+
+
+
+    // app/Http/Controllers/EmployeAuthController.php
+
+public function deconnexion(Request $request)
+{
+    // 1. Déconnexion : Démarrage du processus de déconnexion.
+    // Auth::guard('employe')->logout(); // Utilisez 'employe' si vous avez une garde dédiée
+
+    // Pour l'exemple, nous utilisons la déconnexion par défaut si la garde n'est pas spécifiée
+    Auth::logout(); 
+
+    // 2. Invalide la session actuelle
+    $request->session()->invalidate();
+
+    // 3. Regénère le jeton CSRF
+    $request->session()->regenerateToken();
+
+    // 4. Redirige vers la page de connexion ou la page d'accueil (avec un message flash si vous voulez)
+    return redirect()->route('deconnexion'); // Remplacez 'login' par le nom de la route qui affiche votre formulaire d'authentification
+}
+
+
+}

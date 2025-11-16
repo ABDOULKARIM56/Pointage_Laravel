@@ -9,4 +9,4 @@ use Illuminate\Support\Facades\Route;
  
 
 Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
-Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
+Route::post('welcome', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
