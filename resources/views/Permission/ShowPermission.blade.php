@@ -10,21 +10,21 @@
 <body>
 
     <h2>Liste des Permission</h2>
- 
+
         <form method="GET" action="{{ route('show_permission') }}" class="mb-4 d-flex gap-2" id="searchForm">
-        <input 
-            type="text" 
-            name="type" 
+        <input
+            type="text"
+            name="type"
             placeholder="Rechercher"
-            value="{{ request('type') }}" 
-            class="form-control " 
+            value="{{ request('type') }}"
+            class="form-control "
             id="searchInput"
         />
             <!-- c<button type="submit" class="btn btn-primary">Rechercher</button> -->
         </form>
         <form action="{{ route('create_permi') }}" method="GET" class="bg-white p-4 rounded shadow">
             @csrf
-            
+
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
         <script>
@@ -68,7 +68,7 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center mt-3">
-    {{ $services->links() }}
+    {{ $permissions->links() }}
 </div>
 
 </body>

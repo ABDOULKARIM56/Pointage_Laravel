@@ -52,11 +52,10 @@ Route::get('/permission/edit/{id}', [PermissionControllers::class, 'edit'])->nam
 Route::post('/permission/updatepermission/{id}', [PermissionControllers::class, 'update'])->name('modification_permi');
 Route::post('/permission/deletepermission/{id}', [PermissionControllers::class, 'destroy'])->name('suppression_permi');
 
-// permission
+// congés
 Route::get('/conge/showconge', [CongeControllers::class, 'index'])->name('show_conge');
 Route::get('/conge/create', [CongeControllers::class, 'create'])->name('create_cong');
 Route::post('/conge/storeconge', [CongeControllers::class, 'store'])->name('ajouter_conge');
-
 Route::get('/conge/edit/{id}', [CongeControllers::class, 'edit'])->name('edit_cong');
 Route::post('/conge/updateconge/{id}', [CongeControllers::class, 'update'])->name('modification_cong');
 Route::post('/conge/deleteconge/{id}', [CongeControllers::class, 'destroy'])->name('suppression_cong');
@@ -71,4 +70,4 @@ Route::post('/conge/deleteconge/{id}', [CongeControllers::class, 'destroy'])->na
 //                 @endforeach
 //             </ul>
 //         </div>
-//     @endif 
+//     @endif
