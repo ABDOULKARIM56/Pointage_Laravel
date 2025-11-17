@@ -69,13 +69,13 @@
                     </li>
 
                     <li class="mb-1 cursor-pointer">
-                        <a class="nav-link text-white cursor-pointer" data-bs-toggle="pill" data-bs-target="#roles" role="tab">
+                        <a class="nav-link text-white cursor-pointer" data-bs-toggle="pill" data-bs-target="#conges" role="tab">
                             <i class="bi bi-calendar-check me-2"></i> Congés
                         </a>
                     </li>
 
                     <li class="mb-1 cursor-pointer">
-                        <a class="nav-link text-white cursor-pointer" data-bs-toggle="pill" data-bs-target="#leaves" role="tab">
+                        <a class="nav-link text-white cursor-pointer" data-bs-toggle="pill" data-bs-target="#permissions" role="tab">
                             <i class="bi bi-shield-lock me-2"></i> Permissions
                         </a>
                     </li>

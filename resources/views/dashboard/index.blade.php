@@ -6,8 +6,17 @@
 
 @section('content')
     <div class="tab-content">
-    <div class="tab-pane fade show active" id="dashboard">
+    <!-- <div class="tab-pane fade show active" id="permissions">
         @include('Permission.Permission', ['permissions' => $permissions,'mode' => $mode])
+    </div> -->
+    <div class="tab-pane fade show active" id="services">
+        @include('Service.service', ['services' => $services,'mode' => $mode])
+    </div>
+     <div class="tab-pane fade show active" id="departements">
+        @include('Departement.departement', ['departements' => $departements,'mode' => $mode])
+    </div>
+     <div class="tab-pane fade show active" id="conges">
+        @include('Conge.conge', ['conges' => $conges,'mode' => $mode])
     </div>
 
    

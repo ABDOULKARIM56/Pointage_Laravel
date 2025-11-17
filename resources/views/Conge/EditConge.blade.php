@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier un Congé</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -51,8 +40,7 @@
             background-color: #5a6268;
         }
     </style>
-</head>
-<body>
+
 
 <div class="container">
     <div class="card p-4 bg-white">
@@ -75,7 +63,7 @@
                     <i class="fa fa-save"></i> Sauvegarder
                 </button>
 
-                <a href="{{ route('show_conge') }}" class="btn btn-secondary btn-back">
+                          <a href="{{ route('conge', ['mode' => 'list']) }}" class="btn btn-secondary btn-back">
                     <i class="fa fa-arrow-left"></i> Retour
                 </a>
             </div>
@@ -83,5 +71,4 @@
     </div>
 </div>
 
-</body>
-</html>
+

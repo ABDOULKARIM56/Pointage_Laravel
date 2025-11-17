@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Départements</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* En-têtes du tableau */
         th {
@@ -45,8 +34,7 @@
     </style>
 </head>
 
-<body class="bg-light p-4">
-    <div class="container">
+    <div class="container bg-light p-4">
 
         <!-- Titre -->
         <h2 class="mb-4 text-center" style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Départements</h2>
@@ -66,8 +54,9 @@
             </form>
 
             <!-- Ajouter -->
-            <form action="{{ route('create_depart') }}" method="GET">
-                @csrf
+            <form action="{{ route('departement') }}" method="GET">
+                <input type="hidden" name="mode" value="create">
+
                 <button type="submit" class="btn btn-primary px-4">
                     <i class="bi bi-plus-circle"></i> Ajouter
                 </button>
@@ -102,11 +91,12 @@
                                 </form>
 
                                 <!-- Modifier -->
-                                <form action="{{ route('edit_depart',['id' => $depart->id]) }}" method="GET">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
-                                        <i title="Modifier" class="bi bi-pencil-square"></i> 
-                                    </button>
+                                <form action="{{ route('departement') }}" method="GET">
+                                <input type="hidden" name="mode" value="edit">
+                                <input type="hidden" name="id" value="{{ $depart->id }}">
+                                <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
+                                    <i class="bi bi-pencil-square"></i> 
+                                </button>
                                 </form>
 
                                 <!-- Supprimer -->
@@ -142,5 +132,4 @@
             }, 500); // 0,5s après la dernière frappe
         });
     </script>
-</body>
-</html>
+

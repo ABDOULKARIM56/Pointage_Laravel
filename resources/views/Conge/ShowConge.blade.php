@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Congés</title>
-    @vite(entrypoints: ['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Bootstrap & FontAwesome --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
       <style>
         /* En-têtes du tableau */
         th {
@@ -57,10 +45,9 @@
             font-size: 1rem;
         }
     </style>
-</head>
-<body class="bg-light p-4">
 
-    <div class="container">
+
+    <div class="container bg-light p-4">
         <h2 class="mb-4 text-center" style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Congés</h2>
 
         {{-- Barre de recherche et bouton d’ajout --}}
@@ -77,8 +64,9 @@
                 >
             </form>
 
-            <form action="{{ route('create_cong') }}" method="GET">
-                @csrf
+            <form action="{{ route('conge') }}" method="GET">
+                <input type="hidden" name="mode" value="create">
+
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Ajouter
                 </button>
@@ -115,11 +103,13 @@
                             
 
                                 {{-- Bouton Modifier --}}
-                                <a href="{{ route('edit_cong', ['id' => $cong->id]) }}" 
-                                   class="btn btn-sm btn-warning text-white mx-1" 
-                                   title="Modifier">
-                                    <i title="Modifier" class="bi bi-pencil-square"></i>
-                                </a>
+                                <form action="{{ route('conge') }}" method="GET">
+                                <input type="hidden" name="mode" value="edit">
+                                <input type="hidden" name="id" value="{{ $cong->id }}">
+                                <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
+                                    <i class="bi bi-pencil-square"></i> 
+                                </button>
+                                </form>
 
                                 {{-- Bouton Supprimer --}}
                                 <form action="{{ route('suppression_cong', ['id' => $cong->id]) }}" 
@@ -150,5 +140,4 @@
         </div>
     </div>
 
-</body>
-</html>
+

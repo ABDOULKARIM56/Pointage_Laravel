@@ -49,7 +49,10 @@ Route::post('/departement/updatedepartement/{id}', [DepartementControllers::clas
 Route::post('/departement/deletedepartement/{id}', [DepartementControllers::class, 'destroy'])->name('suppression_depart');
 
 
-Route::get('/permission/permission', [DashboardController::class, 'index'])->name('permission');
+Route::get('/permission/permission', [DashboardController::class, 'index_permission'])->name('permission');
+Route::get('/departement/departement', [DashboardController::class, 'index_departement'])->name('departement');
+Route::get('/conge/conge', [DashboardController::class, 'index_conge'])->name('conge');
+Route::get('/service/service', [DashboardController::class, 'index_service'])->name('service');
 
 // service
 Route::get('/service/showservice', [ServiceControllers::class, 'index'])->name('show_service');
