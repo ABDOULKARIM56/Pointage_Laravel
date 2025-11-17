@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +6,8 @@
     <title>Liste des Permissions</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Icônes Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"> -->
 
      <style>
         /* En-têtes du tableau */
@@ -55,9 +55,9 @@
             font-size: 1rem;
         }
     </style>
-</head>
+<!-- </head>
 
-<body class="bg-light p-4">
+<body class="bg-light p-4"> -->
     <div class="container">
 
         <!-- Titre -->
@@ -78,12 +78,18 @@
             </form>
 
             <!-- Ajouter -->
-            <form action="{{ route('create_permi') }}" method="GET">
-                @csrf
+             <form action="{{ route('permission') }}" method="GET">
+                <input type="hidden" name="mode" value="create">
                 <button type="submit" class="btn btn-primary px-4">
                     <i class="bi bi-plus-circle"></i> Ajouter
                 </button>
             </form>
+            <!--b <form action="{{ route('create_permi', ['mode' => 'create']) }}" method="GET">
+                @csrf
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-plus-circle"></i> Ajouter
+                </button>
+            </form> -->
         </div>
 
         <!-- Tableau -->
@@ -106,12 +112,20 @@
                              
 
                                 <!-- Modifier -->
-                                <form action="{{ route('edit_permi', ['id' => $permi->id]) }}" method="GET">
+                                <!-- s<form action="{{ route('permission', ['id' => $permi->id]) }}" method="GET">
                                     @csrf
                                     <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
                                         <i class="bi bi-pencil-square"></i> 
                                     </button>
-                                </form>
+                                </form> -->
+                            <form action="{{ route('permission') }}" method="GET">
+                                <input type="hidden" name="mode" value="edit">
+                                <input type="hidden" name="id" value="{{ $permi->id }}">
+                                <button type="submit" class="btn btn-warning btn-sm btn-action text-white">
+                                    <i class="bi bi-pencil-square"></i> 
+                                </button>
+                            </form>
+
 
                                 <!-- Supprimer -->
                                 <form action="{{ route('suppression_permi', ['id' => $permi->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette permission ?');">
@@ -146,5 +160,5 @@
             }, 500); // 0,5s après la dernière frappe
         });
     </script>
-</body>
-</html>
+<!-- </body>
+</html> -->

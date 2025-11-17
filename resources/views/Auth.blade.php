@@ -33,8 +33,8 @@
                             <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
                         @endif
 
-                        <form action="{{ route('connexion') }}" method="POST" novalidate>
-                            @csrf
+            <form method="POST" action="{{ route('connexion') }}">
+                                @csrf
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">E‑mail</label>

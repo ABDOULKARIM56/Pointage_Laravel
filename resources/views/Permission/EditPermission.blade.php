@@ -1,14 +1,12 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier une Permission</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> -->
 
     <style>
         body {
@@ -51,21 +49,21 @@
             background-color: #5a6268;
         }
     </style>
-</head>
-<body>
+<!-- </head>
+<body> -->
 
 <div class="container">
     <div class="card p-4 bg-white">
         <h2 style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Modifier une Permission</h2>
 
-        <form action="{{ route('modification_permi',['id' => $permission->id]) }}" method="POST">
+        <form action="{{ route('modification_permi',['id' => $permissions->id]) }}" method="POST">
             @csrf
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type de Permission</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa fa-key"></i></span>
-                    <input type="text" id="type" name="type" class="form-control" value="{{ $permission->type }}" required>
+                    <input type="text" id="type" name="type" class="form-control" value="{{ $permissions->type }}" required>
                 </div>
             </div>
 
@@ -83,5 +81,5 @@
     </div>
 </div>
 
-</body>
-</html>
+<!-- </body>
+</html> -->

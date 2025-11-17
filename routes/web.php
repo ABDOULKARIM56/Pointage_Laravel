@@ -6,7 +6,26 @@ use App\Http\Controllers\DepartementControllers;
 use App\Http\Controllers\Details;
 use App\Http\Controllers\PermissionControllers;
 use App\Http\Controllers\ServiceControllers;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
+
+
+// Page d'accueil ou formulaire de connexion
+Route::get('/', [EmployeAuthController::class, 'showLoginForm'])->name('login');
+
+// Connexion (POST)
+Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
+
+// Déconnexion (POST)
+Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
+
+// Tableau de bord (route protégée)
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard')
+    ->middleware('auth'); // protège la page par l'auth
+
 
  Route::get('/', function () {
     return view('Auth');
@@ -19,10 +38,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/detail/detail/{detail}/{model}', action: [Details::class, 'show_depart'])->name('detail');
 
 
-// authentification
-Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
-
-Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
 
 // departement
 Route::get('/departement/showdepartement', [DepartementControllers::class, 'index'])->name('show_departement');
@@ -34,6 +49,7 @@ Route::post('/departement/updatedepartement/{id}', [DepartementControllers::clas
 Route::post('/departement/deletedepartement/{id}', [DepartementControllers::class, 'destroy'])->name('suppression_depart');
 
 
+Route::get('/permission/permission', [DashboardController::class, 'index'])->name('permission');
 
 // service
 Route::get('/service/showservice', [ServiceControllers::class, 'index'])->name('show_service');
@@ -73,4 +89,5 @@ Route::post('/conge/deleteconge/{id}', [CongeControllers::class, 'destroy'])->na
 //             </ul>
 //         </div>
 //     @endif 
+
 
