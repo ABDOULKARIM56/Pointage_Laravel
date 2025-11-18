@@ -57,7 +57,7 @@
 
             <div class="collapse" id="settingsSubmenu">
                 <ul class="nav flex-column ms-4 small">
-                    <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#services"><i class="bi bi-building me-2"></i> Services</a></li>
+                    <li class="mb-1"><a class="nav-link text-white active" data-bs-toggle="pill" data-bs-target="#services"><i class="bi bi-building me-2"></i> Services</a></li>
                     <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#departements"><i class="bi bi-diagram-3 me-2"></i> Départements</a></li>
                     <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#conges"><i class="bi bi-calendar-check me-2"></i> Congés</a></li>
                     <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#permissions"><i class="bi bi-shield-lock me-2"></i> Permissions</a></li>

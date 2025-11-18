@@ -9,7 +9,7 @@
         @include('Permission.Permission', ['permissions' => $permissions,'mode' => $mode])
     </div>
 
-    <div class="tab-pane fade" id="services">
+    <div class="tab-pane fade show active" id="services">
         @include('Service.service', ['services' => $services,'mode' => $mode])
     </div>
 

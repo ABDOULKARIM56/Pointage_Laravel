@@ -12,8 +12,8 @@
     {{-- On peut ajouter des styles spécifiques ici si besoin --}}
 </head>
 
-<body class="bg-light">
-    <div class="d-flex vh-100">
+<body class="bg-light d-flex flex-column vh-100">
+    <div class="d-flex flex-grow-1">
         
         {{-- Inclusion de la barre de navigation latérale --}}
         @include('partials.sidebar')
