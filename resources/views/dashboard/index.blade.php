@@ -1,67 +1,86 @@
-{{-- Fichier : resources/views/dashboard/index.blade.php --}}
-
 @extends('layouts.app')
 
 @section('title', 'Tableau de bord')
 
 @section('content')
-    <div class="tab-content">
-    <!-- <div class="tab-pane fade show active" id="permissions">
+<div class="tab-content">
+
+    <div class="tab-pane fade" id="permissions">
         @include('Permission.Permission', ['permissions' => $permissions,'mode' => $mode])
-    </div> -->
-    <div class="tab-pane fade show active" id="services">
+    </div>
+
+    <div class="tab-pane fade" id="services">
         @include('Service.service', ['services' => $services,'mode' => $mode])
     </div>
-     <div class="tab-pane fade show active" id="departements">
+
+    <div class="tab-pane fade" id="departements">
         @include('Departement.departement', ['departements' => $departements,'mode' => $mode])
     </div>
-     <div class="tab-pane fade show active" id="conges">
+
+    <div class="tab-pane fade" id="conges">
         @include('Conge.conge', ['conges' => $conges,'mode' => $mode])
     </div>
 
-   
 </div>
-
 @endsection
 
-{{-- Injection du script JS spécifique à cette page --}}
+
 @push('scripts')
-    <script>
-        function updateDateTime() {
-            const dateElement = document.getElementById("current-date");
-            const timeElement = document.getElementById("current-time");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-            // Créer un objet Date
-            const now = new Date();
+    const sidebarLinks = document.querySelectorAll('#sidebarMenu .nav-link');
+    const allTabs = document.querySelectorAll('.tab-pane');
 
-            // Format de la date (ex : Mardi 12 Novembre 2025)
-            const optionsDate = {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-            };
-            const formattedDate = now.toLocaleDateString("fr-FR", optionsDate);
+    // Charger dernier onglet
+    const savedTarget = localStorage.getItem("activeSidebarItem");
 
-            // Format de l’heure (ex : 14:32:10)
-            const formattedTime = now
-                .toLocaleTimeString("fr-FR", {
-                    hour12: false,
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                })
-                .replace(/\./g, ":"); // correction pour certains navigateurs
+    if (savedTarget) {
 
-            // Injecter dans le HTML
-            dateElement.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-            timeElement.textContent = formattedTime;
-        }
+        // Activation tab-pane
+        allTabs.forEach(tab => {
+            if ('#' + tab.id === savedTarget) {
+                tab.classList.add('show', 'active');
+            } else {
+                tab.classList.remove('show', 'active');
+            }
+        });
 
-        // Mise à jour immédiate
-        updateDateTime();
+        // Activation lien sidebar
+        sidebarLinks.forEach(link => {
+            if (link.dataset.bsTarget === savedTarget) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
 
-        // Rafraîchir chaque seconde
-        setInterval(updateDateTime, 1000);
-    </script>
+    // Lors du clic sur un lien
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function () {
+
+            const target = this.dataset.bsTarget;
+
+            // Enregistrer dans localStorage
+            localStorage.setItem("activeSidebarItem", target);
+
+            // Activer tab
+            allTabs.forEach(tab => {
+                if ("#" + tab.id === target) {
+                    tab.classList.add('show', 'active');
+                } else {
+                    tab.classList.remove('show', 'active');
+                }
+            });
+
+            // Activer lien
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+});
+</script>
+
 @endpush
