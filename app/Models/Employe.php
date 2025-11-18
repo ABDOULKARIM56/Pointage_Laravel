@@ -190,4 +190,51 @@ class Employe extends Authenticatable
     {
         return $query->where('role', $role);
     }
+    // Dans App\Models\Employe
+
+/**
+ * Obtenir les pointages du mois courant
+ */
+public function pointagesDuMois()
+{
+    return $this->pointages()
+        ->whereYear('date', now()->year)
+        ->whereMonth('date', now()->month)
+        ->orderBy('date', 'desc');
+}
+
+/**
+ * Calculer le taux de présence du mois
+ */
+public function getTauxPresenceMoisAttribute()
+{
+    $pointagesMois = $this->pointagesDuMois()->get();
+    $totalJours = $pointagesMois->count();
+    
+    if ($totalJours === 0) return 0;
+    
+    $presents = $pointagesMois->where('statut', 'présent')->count();
+    
+    return round(($presents / $totalJours) * 100, 2);
+}
+
+/**
+ * Vérifier si l'employé a pointé aujourd'hui
+ */
+public function aPointeAujourdhui()
+{
+    return $this->pointages()
+        ->where('date', today())
+        ->exists();
+}
+
+/**
+ * Obtenir le pointage d'aujourd'hui
+ */
+public function pointageAujourdhui()
+{
+    return $this->pointages()
+        ->where('date', today())
+        ->first();
+}
 }

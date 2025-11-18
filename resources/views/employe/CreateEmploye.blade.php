@@ -125,7 +125,7 @@
 </div>
 @endsection --}}
 
-@extends('layouts.app')
+{{-- - @extends('layouts.app')
 
 @section('title', 'Ajouter un Employé')
 
@@ -330,5 +330,164 @@
             </form>
         </div>
     </div>
+</div>
+@endsection --}}
+
+@extends('layouts.app')
+
+@section('title', 'Ajouter un Employé')
+
+@section('content')
+<div class="container-fluid px-4">
+
+    <!-- Titre + breadcrumb -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold mt-4">
+                <i class="fas fa-user-plus me-2 text-primary"></i> Ajouter un Employé
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-white shadow-sm px-3 py-2 rounded">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('employe.ShowEmploye') }}">Liste des Employés</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- CARD FORM -->
+    <div class="card card-custom">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i> Formulaire d'ajout</h5>
+        </div>
+
+        <div class="card-body p-4">
+            <form action="{{ route('employe.store') }}" method="POST">
+                @csrf
+
+                <!-- Informations personnelles -->
+                <div class="section-title mt-3">Informations Personnelles</div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nom *</label>
+                        <input type="text" name="nom" class="form-control @error('nom') is-invalid @enderror"
+                               value="{{ old('nom') }}" required>
+                        @error('nom') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Prénom *</label>
+                        <input type="text" name="prenom" class="form-control @error('prenom') is-invalid @enderror"
+                               value="{{ old('prenom') }}" required>
+                        @error('prenom') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Genre *</label>
+                        <select name="genre" class="form-select" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="Homme" {{ old('genre')=='Homme'?'selected':'' }}>Homme</option>
+                            <option value="Femme" {{ old('genre')=='Femme'?'selected':'' }}>Femme</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Date de naissance *</label>
+                        <input type="date" name="date_naissance" class="form-control"
+                               value="{{ old('date_naissance') }}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">État civil *</label>
+                        <select name="etat_civil" class="form-select" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="Célibataire">Célibataire</option>
+                            <option value="Marié(e)">Marié(e)</option>
+                            <option value="Divorcé(e)">Divorcé(e)</option>
+                            <option value="Veuf(ve)">Veuf(ve)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nationalité *</label>
+                        <input type="text" name="nationalite" class="form-control" value="{{ old('nationalite') }}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Adresse *</label>
+                        <input type="text" name="adresse" class="form-control" value="{{ old('adresse') }}" required>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="section-title mt-4">Informations de Contact</div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Email *</label>
+                        <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Téléphone *</label>
+                        <input type="text" name="numero" class="form-control" value="{{ old('numero') }}" required>
+                    </div>
+                </div>
+
+                <!-- Professionnelles -->
+                <div class="section-title mt-4">Informations Professionnelles</div>
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Matricule *</label>
+                        <input type="text" name="matricule" class="form-control" value="{{ old('matricule') }}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Service *</label>
+                        <select name="service_id" class="form-select" required>
+                            <option value="">Sélectionnez...</option>
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}">{{ $service->nom }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Rôle *</label>
+                        <select name="role" class="form-select" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Employé">Employé</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="section-title mt-4">Sécurité</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Mot de passe *</label>
+                        <input type="password" name="password" class="form-control" required>
+                        <small class="text-muted">Minimum 8 caractères</small>
+                    </div>
+                </div>
+
+                <!-- Boutons -->
+                <div class="mt-4">
+                    <button class="btn btn-primary btn-rounded">
+                        <i class="fas fa-save me-1"></i> Enregistrer
+                    </button>
+                    <a href="{{ route('employe.ShowEmploye') }}" class="btn btn-light border btn-rounded ms-2">
+                        <i class="fas fa-arrow-left me-1"></i> Retour
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
 </div>
 @endsection

@@ -70,9 +70,9 @@
 </div>
 @endsection--}}
 
-@extends('layouts.app')
+{{--@extends('layouts.app')
 
-@section('title', 'Liste des Employés')
+@section(section: 'title', 'Liste des Employés')
 
 @section('content')
 <div class="container-fluid px-4">
@@ -236,5 +236,196 @@ function confirmDelete(id) {
         document.getElementById('delete-form-' + id).submit();
     }
 }
+</script> --}}
+
+@extends('layouts.app')
+
+@section('title', 'Liste des Employés')
+
+@section('content')
+<div class="container-fluid px-4">
+
+    <!-- Titre principal -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mt-4 mb-3 text-primary fw-bold">
+                <i class="fas fa-users me-2"></i> Gestion des Employés
+            </h1>
+        </div>
+    </div>
+
+    <!-- Message de succès -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    <!-- Filtres de recherche -->
+    <div class="card shadow-sm mb-4 border-0">
+        <div class="card-body">
+
+            <form method="GET" action="{{ route('employe.ShowEmploye') }}" class="row g-3">
+
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Rechercher</label>
+                    <input type="text" name="nom" class="form-control shadow-sm"
+                           placeholder="Nom, prénom ou matricule..."
+                           value="{{ request('nom') }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Service</label>
+                    <select name="service_id" class="form-select shadow-sm">
+                        <option value="">Tous les services</option>
+                        @foreach($services as $service)
+                            <option value="{{ $service->id }}" 
+                                {{ request('service_id') == $service->id ? 'selected' : '' }}>
+                                {{ $service->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Rôle</label>
+                    <select name="role" class="form-select shadow-sm">
+                        <option value="">Tous les rôles</option>
+                        <option value="Admin"   {{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="Manager" {{ request('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                        <option value="Employé" {{ request('role') == 'Employé' ? 'selected' : '' }}>Employé</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm">
+                        <i class="fas fa-search me-1"></i> Filtrer
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-4 d-flex gap-2">
+                <a href="{{ route('employe.create') }}" class="btn btn-success shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Ajouter un employé
+                </a>
+                <a href="{{ route('employe.ShowEmploye') }}" class="btn btn-secondary shadow-sm">
+                    <i class="fas fa-redo me-1"></i> Réinitialiser
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Tableau des employés -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="mb-0 fw-semibold">
+                <i class="fas fa-list me-2"></i> Liste des Employés
+            </h5>
+            <span class="badge bg-light text-dark px-3 py-2 shadow-sm">{{ $employes->count() }}</span>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom Complet</th>
+                            <th>Email</th>
+                            <th>Service</th>
+                            <th>Rôle</th>
+                            <th>Téléphone</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @forelse($employes as $employe)
+                            <tr>
+                                <td><strong>{{ $employe->matricule }}</strong></td>
+
+                                <td>
+                                    <i class="fas fa-user text-primary me-1"></i>
+                                    {{ $employe->prenom }} {{ $employe->nom }}
+                                </td>
+
+                                <td>{{ $employe->email }}</td>
+
+                                <td>
+                                    <span class="badge bg-info text-dark shadow-sm">
+                                        {{ $employe->service->nom ?? 'N/A' }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    @if($employe->role == 'Admin')
+                                        <span class="badge bg-danger shadow-sm">{{ $employe->role }}</span>
+                                    @elseif($employe->role == 'Manager')
+                                        <span class="badge bg-warning text-dark shadow-sm">{{ $employe->role }}</span>
+                                    @else
+                                        <span class="badge bg-secondary shadow-sm">{{ $employe->role }}</span>
+                                    @endif
+                                </td>
+
+                                <td>{{ $employe->numero }}</td>
+
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="{{ route('employe.show', $employe->id) }}" 
+                                           class="btn btn-sm btn-info shadow-sm" title="Voir">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <a href="{{ route('employe.edit', $employe->id) }}" 
+                                           class="btn btn-sm btn-warning shadow-sm" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+
+                                        <button type="button" 
+                                                class="btn btn-sm btn-danger shadow-sm"
+                                                onclick="confirmDelete({{ $employe->id }})"
+                                                title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+
+                                    <form id="delete-form-{{ $employe->id }}" 
+                                          action="{{ route('employe.destroy', $employe->id) }}" 
+                                          method="POST" hidden>
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
+
+                            </tr>
+
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <i class="fas fa-inbox fa-3x mb-3 text-secondary"></i>
+                                    <p class="mb-0 fw-semibold">Aucun employé trouvé</p>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function confirmDelete(id) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')) {
+        document.getElementById('delete-form-' + id).submit();
+    }
+}
 </script>
 @endsection
+

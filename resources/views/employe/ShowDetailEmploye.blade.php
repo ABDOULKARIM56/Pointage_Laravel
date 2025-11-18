@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{--  @extends('layouts.app')
 
 @section('title', 'Détails de l\'Employé')
 
@@ -164,4 +164,85 @@ function confirmDelete() {
     }
 }
 </script>
+@endsection --}}
+
+@extends('layouts.app')
+
+@section('title', 'Détails de l\'employé')
+
+@section('content')
+<div class="container-fluid px-4">
+
+    <!-- Titre -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold mt-4">
+                <i class="fas fa-id-card me-2 text-primary"></i> Détails de l'Employé
+            </h2>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb shadow-sm">
+                    <li class="breadcrumb-item"><a href="{{ route('employe.ShowEmploye') }}">Liste des Employés</a></li>
+                    <li class="breadcrumb-item active">Détails</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- CARD DETAIL -->
+    <div class="card shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+                <div class="col-md-3 text-center">
+
+                    <!-- Avatar -->
+                    <div class="avatar-circle mx-auto mb-3">
+                        {{ strtoupper(substr($employe->nom, 0, 1)) }}
+                    </div>
+
+                    <h4 class="fw-bold text-primary">
+                        {{ $employe->prenom }} {{ $employe->nom }}
+                    </h4>
+
+                    <p class="text-muted">{{ $employe->role }}</p>
+
+                    <a href="{{ route('employe.edit', $employe->id) }}" class="btn btn-primary w-100 mb-2">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="section-title">Informations Personnelles</div>
+                    <div class="row g-3">
+                        <div class="col-md-4"><strong>Genre:</strong> {{ $employe->genre }}</div>
+                        <div class="col-md-4"><strong>Date naissance:</strong> {{ $employe->date_naissance }}</div>
+                        <div class="col-md-4"><strong>État civil:</strong> {{ $employe->etat_civil }}</div>
+                        <div class="col-md-6"><strong>Nationalité:</strong> {{ $employe->nationalite }}</div>
+                        <div class="col-md-6"><strong>Adresse:</strong> {{ $employe->adresse }}</div>
+                    </div>
+
+                    <div class="section-title">Contact</div>
+                    <div class="row g-3">
+                        <div class="col-md-6"><strong>Email:</strong> {{ $employe->email }}</div>
+                        <div class="col-md-6"><strong>Téléphone:</strong> {{ $employe->numero }}</div>
+                    </div>
+
+                    <div class="section-title">Profession</div>
+                    <div class="row g-3">
+                        <div class="col-md-4"><strong>Matricule:</strong> {{ $employe->matricule }}</div>
+                        <div class="col-md-4"><strong>Service:</strong> {{ $employe->service->nom }}</div>
+                        <div class="col-md-4"><strong>Rôle:</strong> {{ $employe->role }}</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 @endsection

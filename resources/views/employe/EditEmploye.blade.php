@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('title', 'Modifier l\'Employé')
 
@@ -234,5 +234,149 @@
             </div>
         </div>
     </div>
+</div>
+@endsection --}}
+
+@extends('layouts.app')
+
+@section('title', 'Modifier un Employé')
+
+@section('content')
+<div class="container-fluid px-4">
+
+    <!-- Titre -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold mt-4">
+                <i class="fas fa-user-edit me-2 text-primary"></i> Modifier l'Employé
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb shadow-sm">
+                    <li class="breadcrumb-item"><a href="{{ route('employe.ShowEmploye') }}">Liste des Employés</a></li>
+                    <li class="breadcrumb-item active">Modifier</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- CARD FORM -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-pen me-2"></i> Modifier l'Employé</h5>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form action="{{ route('employe.update', $employe->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <!-- Informations personnelles -->
+                <div class="section-title">Informations Personnelles</div>
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nom *</label>
+                        <input type="text" name="nom" class="form-control" value="{{ $employe->nom }}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Prénom *</label>
+                        <input type="text" name="prenom" class="form-control" value="{{ $employe->prenom }}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Genre *</label>
+                        <select name="genre" class="form-select" required>
+                            <option value="Homme" {{ $employe->genre=='Homme'?'selected':'' }}>Homme</option>
+                            <option value="Femme" {{ $employe->genre=='Femme'?'selected':'' }}>Femme</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Date de naissance *</label>
+                        <input type="date" name="date_naissance" class="form-control"
+                               value="{{ $employe->date_naissance }}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">État civil *</label>
+                        <select name="etat_civil" class="form-select">
+                            <option value="Célibataire" {{ $employe->etat_civil=='Célibataire'?'selected':'' }}>Célibataire</option>
+                            <option value="Marié(e)" {{ $employe->etat_civil=='Marié(e)'?'selected':'' }}>Marié(e)</option>
+                            <option value="Divorcé(e)" {{ $employe->etat_civil=='Divorcé(e)'?'selected':'' }}>Divorcé(e)</option>
+                            <option value="Veuf(ve)" {{ $employe->etat_civil=='Veuf(ve)'?'selected':'' }}>Veuf(ve)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nationalité *</label>
+                        <input type="text" name="nationalite" class="form-control" value="{{ $employe->nationalite }}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Adresse *</label>
+                        <input type="text" name="adresse" class="form-control" value="{{ $employe->adresse }}" required>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="section-title">Informations de Contact</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Email *</label>
+                        <input type="email" name="email" class="form-control" value="{{ $employe->email }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Téléphone *</label>
+                        <input type="text" name="numero" class="form-control" value="{{ $employe->numero }}" required>
+                    </div>
+                </div>
+
+                <!-- Profession -->
+                <div class="section-title">Informations Professionnelles</div>
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Matricule *</label>
+                        <input type="text" name="matricule" class="form-control" value="{{ $employe->matricule }}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Service *</label>
+                        <select name="service_id" class="form-select">
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}"
+                                    {{ $employe->service_id == $service->id ? 'selected' : '' }}>
+                                    {{ $service->nom }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Rôle *</label>
+                        <select name="role" class="form-select">
+                            <option value="Admin" {{ $employe->role=='Admin'?'selected':'' }}>Admin</option>
+                            <option value="Manager" {{ $employe->role=='Manager'?'selected':'' }}>Manager</option>
+                            <option value="Employé" {{ $employe->role=='Employé'?'selected':'' }}>Employé</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Boutons -->
+                <div class="mt-4">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Enregistrer les modifications
+                    </button>
+
+                    <a href="{{ route('employe.ShowEmploye') }}" class="btn btn-secondary ms-2">
+                        <i class="fas fa-arrow-left me-1"></i> Retour
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
 @endsection
