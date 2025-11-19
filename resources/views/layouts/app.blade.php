@@ -103,7 +103,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!--nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-clock"></i> Système de Pointage
@@ -112,15 +112,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+            <div class="collapse navbar-collapse" id="navbarNav"-->
+                <!--ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('employe.ShowEmploye') }}">
                             <i class="fas fa-users"></i> Employés
                         </a>
                     </li>
                     <!-- Dans resources/views/layouts/app.blade.php ou votre sidebar -->
-                    <li class="nav-item">
+                    <!--li class="nav-item">
                         <a class="nav-link" href="{{ route('pointage.index') }}">
                             <i class="fas fa-clock me-2"></i> Pointage
                         </a>
@@ -133,7 +133,7 @@
                 </ul>
 
                 <!-- Profil -->
-                <ul class="navbar-nav">
+                <!--ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                             <i class="fas fa-user-circle"></i> Mon Compte
@@ -159,14 +159,14 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="py-4">
+    <!--main class="py-4">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
+    <!--footer class="bg-dark text-white text-center py-3 mt-5">
         <p class="mb-0">&copy; 2024 Système de Pointage. Tous droits réservés.</p>
-    </footer>
+    </footer-->
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

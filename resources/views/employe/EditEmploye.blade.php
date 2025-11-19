@@ -97,16 +97,49 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Nationalité <span class="text-danger">*</span></label>
-                                <input type="text" name="nationalite" 
-                                       class="form-control @error('nationalite') is-invalid @enderror" 
-                                       value="{{ old('nationalite', $employe->nationalite) }}" required>
-                                @error('nationalite')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nationalité *</label>
+                        <select name="nationalite" class="form-select @error('nationalite') is-invalid @enderror" required>
+                            <option value="">-- Sélectionnez une nationalité --</option>
+                            <option value="Nigérienne" {{ old('nationalite')=='Nigérienne'?'selected':'' }}>Nigérienne</option>
+                            <option value="Béninoise" {{ old('nationalite')=='Béninoise'?'selected':'' }}>Béninoise</option>
+                            <option value="Burkinabé" {{ old('nationalite')=='Burkinabé'?'selected':'' }}>Burkinabé</option>
+                            <option value="Malienne" {{ old('nationalite')=='Malienne'?'selected':'' }}>Malienne</option>
+                            <option value="Sénégalaise" {{ old('nationalite')=='Sénégalaise'?'selected':'' }}>Sénégalaise</option>
+                            <option value="Ivoirienne" {{ old('nationalite')=='Ivoirienne'?'selected':'' }}>Ivoirienne</option>
+                            <option value="Togolaise" {{ old('nationalite')=='Togolaise'?'selected':'' }}>Togolaise</option>
+                            <option value="Ghanaéenne" {{ old('nationalite')=='Ghanaéenne'?'selected':'' }}>Ghanaéenne</option>
+                            <option value="Guinéenne" {{ old('nationalite')=='Guinéenne'?'selected':'' }}>Guinéenne</option>
+                            <option value="Camerounaise" {{ old('nationalite')=='Camerounaise'?'selected':'' }}>Camerounaise</option>
+                            <option value="Nigériane" {{ old('nationalite')=='Nigériane'?'selected':'' }}>Nigériane</option>
+                            <option value="Tchadienne" {{ old('nationalite')=='Tchadienne'?'selected':'' }}>Tchadienne</option>
+                            <option value="Congolaise (RDC)" {{ old('nationalite')=='Congolaise (RDC)'?'selected':'' }}>Congolaise (RDC)</option>
+                            <option value="Congolaise (Congo)" {{ old('nationalite')=='Congolaise (Congo)'?'selected':'' }}>Congolaise (Congo)</option>
+                            <option value="Gambienne" {{ old('nationalite')=='Gambienne'?'selected':'' }}>Gambienne</option>
+                            <option value="Mauritanienne" {{ old('nationalite')=='Mauritanienne'?'selected':'' }}>Mauritanienne</option>
+                            <option value="Marocaine" {{ old('nationalite')=='Marocaine'?'selected':'' }}>Marocaine</option>
+                            <option value="Algérienne" {{ old('nationalite')=='Algérienne'?'selected':'' }}>Algérienne</option>
+                            <option value="Tunisienne" {{ old('nationalite')=='Tunisienne'?'selected':'' }}>Tunisienne</option>
+                            <option value="Égyptienne" {{ old('nationalite')=='Égyptienne'?'selected':'' }}>Égyptienne</option>
+                            <option value="Française" {{ old('nationalite')=='Française'?'selected':'' }}>Française</option>
+                            <option value="Belge" {{ old('nationalite')=='Belge'?'selected':'' }}>Belge</option>
+                            <option value="Suisse" {{ old('nationalite')=='Suisse'?'selected':'' }}>Suisse</option>
+                            <option value="Allemande" {{ old('nationalite')=='Allemande'?'selected':'' }}>Allemande</option>
+                            <option value="Espagnole" {{ old('nationalite')=='Espagnole'?'selected':'' }}>Espagnole</option>
+                            <option value="Portugaise" {{ old('nationalite')=='Portugaise'?'selected':'' }}>Portugaise</option>
+                            <option value="Italienne" {{ old('nationalite')=='Italienne'?'selected':'' }}>Italienne</option>
+                            <option value="Néerlandaise" {{ old('nationalite')=='Néerlandaise'?'selected':'' }}>Néerlandaise</option>
+                            <option value="Britannique" {{ old('nationalite')=='Britannique'?'selected':'' }}>Britannique</option>
+                            <option value="Américaine" {{ old('nationalite')=='Américaine'?'selected':'' }}>Américaine</option>
+                            <option value="Canadienne" {{ old('nationalite')=='Canadienne'?'selected':'' }}>Canadienne</option>
+                            <option value="Brésilienne" {{ old('nationalite')=='Brésilienne'?'selected':'' }}>Brésilienne</option>
+                            <option value="Chinoise" {{ old('nationalite')=='Chinoise'?'selected':'' }}>Chinoise</option>
+                            <option value="Indienne" {{ old('nationalite')=='Indienne'?'selected':'' }}>Indienne</option>
+                            <option value="Turque" {{ old('nationalite')=='Turque'?'selected':'' }}>Turque</option>
+                            <option value="Japonaise" {{ old('nationalite')=='Japonaise'?'selected':'' }}>Japonaise</option>
+                        </select>
+                        @error('nationalite') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
                             <div class="col-md-6">
                                 <label class="form-label">Adresse <span class="text-danger">*</span></label>
                                 <input type="text" name="adresse" 
