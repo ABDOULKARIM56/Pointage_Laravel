@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('matricule');
             $table->string('email');
-            $table->string('nationnalite');
+            $table->string('nationalite');
             $table->string('genre');
             $table->string('etat_civil');
             $table->string('numero');
