@@ -5,10 +5,8 @@
   <div class="tab-content mt-3" id="settingsTabContent">
     <div class="tab-pane fade show active" id="services">
 
-      <h4>🛠️ Configurations</h4>
-      <p>Contenu fictif pour la Configurations</p>
 
-      <h3 class="fw-bold mb-4">🔧 Configurations de l'entreprise</h3>
+      <h3 class="fw-bold mb-4">🛠️ Configurations de l'entreprise</h3>
 
       <div class="row g-4">
 

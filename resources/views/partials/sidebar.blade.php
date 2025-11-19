@@ -1,4 +1,4 @@
-<div class="bg-primary shadow-sm d-none d-md-flex flex-column shrink-0" style="width: 280px;">
+<div class="bg-primary shadow-sm d-none d-md-flex flex-column shrink-0" style="width: 280px">
     <div class="p-3 border-bottom">
         <h5 class="text-primary mb-0 text-center">Saratech</h5>
         <small class="text-muted">Gestion d'Assiduité pour une entreprise</small>

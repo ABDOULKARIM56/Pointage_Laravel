@@ -3,7 +3,7 @@
 @section('content')
 <div class="tab-pane fade show active" id="condition">
 
-    <h3 class="fw-bold mb-4">🔧 Configurations de l'entreprise</h3>
+    <h3 class="fw-bold mb-4">📘 Conditions de l'entreprise</h3>
 
     <div class="row g-4">
 
