@@ -10,7 +10,7 @@
     {{-- On peut ajouter des styles spécifiques ici si besoin --}}
 </head>
 
-<body class="bg-light">
+<body class="bg-primary bg-opacity-10">
     <div class="d-flex vh-100">
         
         {{-- Inclusion de la barre de navigation latérale --}}

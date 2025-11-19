@@ -1,69 +1,152 @@
-<div class="bg-white shadow-sm d-none d-md-flex flex-column flex-shrink-0" style="width: 280px">
+<div class="bg-primary shadow-sm d-none d-md-flex flex-column shrink-0" style="width: 280px">
     <div class="p-3 border-bottom">
         <h5 class="text-primary mb-0 text-center">Saratech</h5>
         <small class="text-muted">Gestion d'Assiduité pour une entreprise</small>
     </div>
 
     {{-- Les liens de la Sidebar --}}
-    <ul class="nav nav-pills flex-column mb-auto p-2" id="sidebarMenu">
-        {{-- Remarque : En production, vous utiliseriez des liens Laravel Route:: pour la navigation --}}
-        <li class="nav-item cursor-pointer">
-            <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#dashboard" role="tab">📊 Tableau de
-                bord</a>
-        </li>
-        <li class="nav-item cursor-pointer">
-            <a class="nav-link" data-bs-toggle="pill" data-bs-target="#employees" role="tab">👥 Gestion des
-                employés</a>
-        </li>
-        <li class="nav-item cursor-pointer">
-            <a class="nav-link" data-bs-toggle="pill" data-bs-target="#attendance" role="tab">🕐 Pointage</a>
-        </li>
-        <li>
-            <a class="nav-link" data-bs-toggle="pill" data-bs-target="#reports" role="tab">📈 Rapports</a>
-        </li>
-        <li>
-            <a class="nav-link" data-bs-toggle="pill" data-bs-target="#settings" role="tab">📘 Conditions</a>
-        </li>
-        <li nav-item cursor-pointer>
-            <a class="nav-link" data-bs-toggle="pill" data-bs-target="#parametre" role="tab">🛠️ Loi & Redaction</a>
-        </li>
-        <!-- Paramètres avec sous-menu -->
-        <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-                href="#settingsSubmenu" role="button" aria-expanded="false">
-                ⚙️ Configurations
-                <span class="ms-2">▾</span>
-            </a>
+    <nav class="">
+  <div class="list-group list-group-flush">
+    <a
+      href="{{ route('dashboard') }}"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      
+      aria-current="page"
+    >
+      <span style="font-size: 1.15rem">📊</span>
+      <div>
+        <div class="fw-semibold">Tableau de bord</div>
+        <small class="text-muted">Vue générale</small>
+      </div>
+    </a>
 
-            <!-- Sous-menu -->
-            <div class="collapse ps-4" id="settingsSubmenu">
-                <ul class="nav flex-column small">
-                    <li>
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#services" role="tab">✔
-                            Services</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#departments" role="tab">✔
-                            Départements</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#roles" role="tab">✔ Congés</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#leaves" role="tab">✔
-                            Permissions</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+    <a
+      href="#"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      
+    >
+      <span style="font-size: 1.15rem">👥</span>
+      <div>
+        <div class="fw-semibold">Employés</div>
+        <small class="text-muted">Gestion</small>
+      </div>
+    </a>
 
-    <div class="mt-auto border-top p-3">
-        <form action="{{ route('deconnexion') }}" method="POST">
-            @csrf {{-- C'est le jeton CSRF obligatoire pour les requêtes POST --}}
-            <button type="submit" class="btn btn-danger w-100">
-                🚪 Déconnexion
-            </button>
-        </form>
+    <a
+      href="#"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      
+    >
+      <span style="font-size: 1.15rem">🕐</span>
+      <div>
+        <div class="fw-semibold">Pointage</div>
+        <small class="text-muted">Entrées / Sorties</small>
+      </div>
+    </a>
+
+    <a
+      href="#"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      data-bs-toggle="pill"
+      
+    >
+      <span style="font-size: 1.15rem">📈</span>
+      <div>
+        <div class="fw-semibold">Rapports</div>
+        <small class="text-muted">Export & filtres</small>
+      </div>
+    </a>
+
+    <a
+      href="{{ route('settings.politique') }}"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      
+    >
+      <span style="font-size: 1.15rem">📘</span>
+      <div>
+        <div class="fw-semibold">Conditions</div>
+        <small class="text-muted">Règles internes</small>
+      </div>
+    </a>
+
+    <a
+      href="{{ route('settings.index') }}"
+      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
+      
+    >
+      <span style="font-size: 1.15rem">🛠️</span>
+      <div>
+        <div class="fw-semibold">Paramètres</div>
+        <small class="text-muted">Horaires & services</small>
+      </div>
+    </a>
+
+    <!-- Collapsible sub-menu -->
+    <div class="mt-2 mb-2">
+      <button
+        class="btn btn-sm btn-outline-dark w-100 d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebarSubmenu"
+        aria-expanded="false"
+      >
+        ⚙️ Configurations
+        <span class="small">▾</span>
+      </button>
+
+      <div class="collapse mt-2 ps-2" id="sidebarSubmenu">
+        <div class="list-group list-group-flush small">
+          <a
+            href="#"
+            class="bg-primary list-group-item list-group-item-action"
+            data-bs-toggle="pill"
+            data-bs-target="#services"
+            role="tab"
+            >✔ Services</a
+          >
+          <a
+            href="#"
+            class="bg-primary list-group-item list-group-item-action"
+            data-bs-toggle="pill"
+            data-bs-target="#departments"
+            role="tab"
+            >✔ Départements</a
+          >
+          <a
+            href="#"
+            class="bg-primary list-group-item list-group-item-action"
+            data-bs-toggle="pill"
+            data-bs-target="#roles"
+            role="tab"
+            >✔ Fonctions</a
+          >
+          <a
+            href="#"
+            class="bg-primary list-group-item list-group-item-action"
+            data-bs-toggle="pill"
+            data-bs-target="#leaves"
+            role="tab"
+            >✔ Congés / Permissions</a
+          >
+        </div>
+      </div>
     </div>
+  </div>
+</nav>
+
+
+    <div class="border-top p-3">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div style="width:42px;height:42px;background:#f1f3f5;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              👤
+            </div>
+            <div class="flex-grow-1">
+              <div class="fw-semibold">Admin</div>
+              <small class="text-muted">admin@techniger.com</small>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-dark text-dark btn-sm flex-grow-1" type="button">Profil</button>
+            <button class="btn btn-danger btn-sm" type="button">Déconnexion</button>
+          </div>
+        </div>
 </div>
