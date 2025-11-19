@@ -1,152 +1,93 @@
-<div class="bg-primary shadow-sm d-none d-md-flex flex-column shrink-0" style="width: 280px">
-    <div class="p-3 border-bottom">
-        <h5 class="text-primary mb-0 text-center">Saratech</h5>
-        <small class="text-muted">Gestion d'Assiduité pour une entreprise</small>
+<!-- SIDEBAR -->
+<div class="bg-primary text-white shadow-sm d-none d-md-flex flex-column flex-shrink-0"
+     style="width: 280px; height: 100vh;">
+
+    <!-- Header -->
+    <div class="p-3 border-bottom border-light bg-white text-primary text-center">
+        <h5 class="mb-0">Saratech</h5>
+        <small>Gestion d'Assiduité pour une entreprise</small>
     </div>
 
-    {{-- Les liens de la Sidebar --}}
-    <nav class="">
-  <div class="list-group list-group-flush">
-    <a
-      href="{{ route('dashboard') }}"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      
-      aria-current="page"
-    >
-      <span style="font-size: 1.15rem">📊</span>
-      <div>
-        <div class="fw-semibold">Tableau de bord</div>
-        <small class="text-muted">Vue générale</small>
-      </div>
-    </a>
+    <!-- Menu -->
+    <ul class="nav nav-pills flex-column mb-auto p-2" id="sidebarMenu">
 
-    <a
-      href="#"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      
-    >
-      <span style="font-size: 1.15rem">👥</span>
-      <div>
-        <div class="fw-semibold">Employés</div>
-        <small class="text-muted">Gestion</small>
-      </div>
-    </a>
+        <li class="nav-item mb-1">
+            <a href="{{ route('dashboard') }}" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#dashboard">
+                <i class="bi bi-calendar-check me-2"></i> Tableau de bord
+            </a>
+        </li>
 
-    <a
-      href="#"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      
-    >
-      <span style="font-size: 1.15rem">🕐</span>
-      <div>
-        <div class="fw-semibold">Pointage</div>
-        <small class="text-muted">Entrées / Sorties</small>
-      </div>
-    </a>
+        <li class="nav-item mb-1">
+            <a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#employees">
+                <i class="bi bi-people me-2"></i> Gestion des employés
+            </a>
+        </li>
 
-    <a
-      href="#"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      data-bs-toggle="pill"
-      
-    >
-      <span style="font-size: 1.15rem">📈</span>
-      <div>
-        <div class="fw-semibold">Rapports</div>
-        <small class="text-muted">Export & filtres</small>
-      </div>
-    </a>
+        <li class="nav-item mb-1">
+            <a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#attendance">
+                <i class="bi bi-clock me-2"></i> Pointage
+            </a>
+        </li>
 
-    <a
-      href="{{ route('settings.politique') }}"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      
-    >
-      <span style="font-size: 1.15rem">📘</span>
-      <div>
-        <div class="fw-semibold">Conditions</div>
-        <small class="text-muted">Règles internes</small>
-      </div>
-    </a>
+        <li class="nav-item mb-1">
+            <a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#reports">
+                <i class="bi bi-graph-up me-2"></i> Rapports
+            </a>
+        </li>
 
-    <a
-      href="{{ route('settings.index') }}"
-      class="bg-primary list-group-item list-group-item-action d-flex align-items-center gap-3"
-      
-    >
-      <span style="font-size: 1.15rem">🛠️</span>
-      <div>
-        <div class="fw-semibold">Paramètres</div>
-        <small class="text-muted">Horaires & services</small>
-      </div>
-    </a>
+        <li class="nav-item mb-1">
+            <a href="{{ route('settings.politique') }}" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#settings">
+                <i class="bi bi-gear me-2"></i> Conditions
+            </a>
+        </li>
 
-    <!-- Collapsible sub-menu -->
-    <div class="mt-2 mb-2">
-      <button
-        class="btn btn-sm btn-outline-dark w-100 d-flex justify-content-between align-items-center"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarSubmenu"
-        aria-expanded="false"
-      >
-        ⚙️ Configurations
-        <span class="small">▾</span>
-      </button>
+        <li class="nav-item mb-1">
+            <a href="{{ route('settings.index') }}" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#parametre">
+                <i class="bi bi-building me-2"></i> Parametre
+            </a>
+        </li>
 
-      <div class="collapse mt-2 ps-2" id="sidebarSubmenu">
-        <div class="list-group list-group-flush small">
-          <a
-            href="#"
-            class="bg-primary list-group-item list-group-item-action"
-            data-bs-toggle="pill"
-            data-bs-target="#services"
-            role="tab"
-            >✔ Services</a
-          >
-          <a
-            href="#"
-            class="bg-primary list-group-item list-group-item-action"
-            data-bs-toggle="pill"
-            data-bs-target="#departments"
-            role="tab"
-            >✔ Départements</a
-          >
-          <a
-            href="#"
-            class="bg-primary list-group-item list-group-item-action"
-            data-bs-toggle="pill"
-            data-bs-target="#roles"
-            role="tab"
-            >✔ Fonctions</a
-          >
-          <a
-            href="#"
-            class="bg-primary list-group-item list-group-item-action"
-            data-bs-toggle="pill"
-            data-bs-target="#leaves"
-            role="tab"
-            >✔ Congés / Permissions</a
-          >
-        </div>
-      </div>
+        <!-- Sous-menu configuration -->
+        <li class="nav-item mt-2">
+            <a class="nav-link text-white d-flex justify-content-between align-items-center"
+               data-bs-toggle="collapse" href="#settingsSubmenu">
+                <span><i class="bi bi-gear me-2"></i> Configurations</span>
+                <span>▾</span>
+            </a>
+
+            <div class="collapse" id="settingsSubmenu">
+                <ul class="nav flex-column ms-4 small">
+                    <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#services"><i class="bi bi-building me-2"></i> Services</a></li>
+                    <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#departements"><i class="bi bi-diagram-3 me-2"></i> Départements</a></li>
+                    <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#conges"><i class="bi bi-calendar-check me-2"></i> Congés</a></li>
+                    <li class="mb-1"><a class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#permissions"><i class="bi bi-shield-lock me-2"></i> Permissions</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Logout -->
+    <div class="mt-auto border-top border-light p-3">
+        <form action="{{ route('deconnexion') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-light w-100 text-primary">
+                <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+            </button>
+        </form>
     </div>
-  </div>
-</nav>
-
-
-    <div class="border-top p-3">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <div style="width:42px;height:42px;background:#f1f3f5;border-radius:8px;display:flex;align-items:center;justify-content:center;">
-              👤
-            </div>
-            <div class="flex-grow-1">
-              <div class="fw-semibold">Admin</div>
-              <small class="text-muted">admin@techniger.com</small>
-            </div>
-          </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-outline-dark text-dark btn-sm flex-grow-1" type="button">Profil</button>
-            <button class="btn btn-danger btn-sm" type="button">Déconnexion</button>
-          </div>
-        </div>
 </div>
+
+<style>
+#sidebarMenu .nav-link {
+    padding: 0.55rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+#sidebarMenu .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+#sidebarMenu .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.35);
+    font-weight: 500;
+}
+</style>

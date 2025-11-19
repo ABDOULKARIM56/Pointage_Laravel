@@ -4,20 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Employé</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .icon {
-            color: #0d6efd;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        svg {
-            width: 10rem;
-            height: 10rem;
-        }
-    </style>
+
+    <title>Ajouter un étudiant</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
 </head>
 
 <body class="bg-light">
@@ -42,8 +33,8 @@
                             <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
                         @endif
 
-                        <form action="{{ route('connexion') }}" method="POST" novalidate>
-                            @csrf
+            <form method="POST" action="{{ route('connexion') }}">
+                                @csrf
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">E‑mail</label>

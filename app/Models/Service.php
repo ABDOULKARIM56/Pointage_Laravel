@@ -29,10 +29,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $fillable = ['nom', 'description'];
-    
-    public function employes()
+    protected $fillable = [
+        'nom',
+        'departement_id',
+        // ajoute les autres champs nécessaires
+    ];
+    //
+      public function employe() {
+        return $this->hasMany(Employe::class,'service_id', 'id');
+    }
+     public function departement()
     {
-        return $this->hasMany(Employe::class);
+        return $this->belongsTo(Departement::class);
     }
 }

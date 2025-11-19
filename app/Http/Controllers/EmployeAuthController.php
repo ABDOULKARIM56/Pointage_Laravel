@@ -8,36 +8,48 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeAuthController extends Controller
 {
+   public function showLoginForm()
+    {
+        return view('auth'); // resources/views/auth.blade.php
+    }
 
     // 🔹 Afficher la liste des étudiants avec filtre par nom
     public function authentification(Request $request)
     {
-         $employe = new \App\Models\Employe();
-         $employe->nom = 'Kader';
-         $employe->prenom = 'Abdoul';
-         $employe->matricule = 'TMP002';
-         $employe->email = 'kader@example.com';
-         $employe->password = Hash::make('12345678');
-         $employe->service_id = 1;
-         $employe->nationnalite = 'Nigerien';
-         $employe->genre = 'Masculin';
-         $employe->etat_civil = 'Célibataire';
-         $employe->numero = '1234567890';
-         $employe->adresse = 'Niamey';
-         $employe->role = 'Employé';
-         $employe->date_naissance = '1997-01-01';
-         $employe->save();
+        $employe = new \App\Models\Employe();
+        $employe->nom = 'Kader';
+        $employe->prenom = 'Abdoul';
+        $employe->matricule = 'TMP002';
+        $employe->email = 'kader@example.com';
+        $employe->password = Hash::make('12345678');
+        $employe->service_id = 1;
+        $employe->nationnalite = 'Nigerien';
+        $employe->genre = 'Masculin';
+        $employe->etat_civil = 'Célibataire';
+        $employe->numero = '1234567890';
+        $employe->adresse = 'Niamey';
+        $employe->role = 'Employé';
+        $employe->date_naissance = '1997-01-01';
+        $employe->save();
 
         //connexion
-    $user = Auth::user();
-        
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        return view('dashboard/index', compact('user'));
-        // return response()->json(['message' => 'Connecté', 'employe' => $user]);
-    } else {
-        return response()->json(['error' => 'Identifiants incorrects'], 401);
+
+    // Traite la connexion
+   
+ 
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        // Connexion réussie → redirection vers /dashboard
+        return redirect()->route('dashboard');
     }
-    }
+
+    // Si échec
+    return back()->withErrors([
+        'email' => 'Identifiants incorrects.',
+    ])->withInput();
+}
+
 
 
     /*  public function deconnexion(Request $request)
@@ -71,7 +83,7 @@ public function deconnexion(Request $request)
     $request->session()->regenerateToken();
 
     // 4. Redirige vers la page de connexion ou la page d'accueil (avec un message flash si vous voulez)
-    return redirect()->route('deconnexion'); // Remplacez 'login' par le nom de la route qui affiche votre formulaire d'authentification
+    return redirect()->route('connexion'); // Remplacez 'login' par le nom de la route qui affiche votre formulaire d'authentification
 }
 
 

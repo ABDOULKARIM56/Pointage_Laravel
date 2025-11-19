@@ -1,11 +1,30 @@
-@import 'tailwindcss';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+ /* En-têtes du tableau */
+        th {
+            background-color: #2196F3 !important;
+            color: white !important;
+            text-align: center;
+        }
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+              /* Alternance correcte des lignes */
+.table tbody tr:nth-child(odd) td {
+    background-color: #F3F3F3 !important;
 }
+
+.table tbody tr:nth-child(even) td {
+    background-color: #ffffff !important;
+}
+
+/* Survol */
+.table-hover tbody tr:hover td {
+    background-color: #1e6104ff !important;
+    color: white !important;
+    transition: 0.2s;
+}
+
+        /* Tableau avec un peu d’arrondi et d’ombre */
+        table {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
