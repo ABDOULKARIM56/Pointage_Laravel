@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employe;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeControlles extends Controller
 {
@@ -69,7 +70,23 @@ public function store(Request $request)
         $request->merge(['date_naissance' => $carbonDate->format('Y-m-d')]);
     }
 
-    Employe::create($request->all());
+    //Employe::create($request->all());
+    Employe::create([
+    'nom' => $request->nom,
+    'prenom' => $request->prenom,
+    'matricule' => $request->matricule,
+    'email' => $request->email,
+    'nationalite' => $request->nationalite,
+    'genre' => $request->genre,
+    'etat_civil' => $request->etat_civil,
+    'numero' => $request->numero,
+    'adresse' => $request->adresse,
+    'service' => $request->service,
+    'role' => $request->role,
+    'date_naissance' => $request->date_naissance,
+    'password' => Hash::make($request->password), // 🔥 mot de passe crypté ici
+]);
+
 
     return redirect()->route('employe.ShowEmploye')->with('success', 'Étudiant ajouté avec succès !');
 }
@@ -124,7 +141,23 @@ public function store(Request $request)
         $request->merge(['date_naissance' => $carbonDate->format('Y-m-d')]);
     }
 
-    $employe->update($request->all());
+   // $employe->update($request->all());
+    $employe->update([
+    'nom' => $request->nom,
+    'prenom' => $request->prenom,
+    'matricule' => $request->matricule,
+    'email' => $request->email,
+    'nationalite' => $request->nationalite,
+    'genre' => $request->genre,
+    'etat_civil' => $request->etat_civil,
+    'numero' => $request->numero,
+    'adresse' => $request->adresse,
+    'service' => $request->service_id,
+    'role' => $request->role,
+    'date_naissance' => $request->date_naissance,
+    'password' => Hash::make($request->password),
+]);
+
 
     return redirect()->route('employe.ShowEmploye')->with('success', 'Étudiant mis à jour avec succès !');
 }

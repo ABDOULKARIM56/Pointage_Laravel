@@ -1,13 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Départements</title>
+    <title>Liste des Permissions</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-</head>
-<body>
 
     <h2>Liste des Permission</h2>
 
@@ -30,11 +27,12 @@
         <script>
         document.getElementById('searchInput').addEventListener('input', function() {
             // Petite temporisation pour éviter de spammer le serveur à chaque frappe
-            clearTimeout(window.searchTimeout);
+           clearTimeout(window.searchTimeout);
             window.searchTimeout = setTimeout(() => {
-                document.getElementById('searchForm').submit();
-            }, 500); // attend 0,5 seconde après la dernière frappe
+                searchForm.submit();
+            }, 500); // 0,5s après la dernière frappe
         });
+
         </script>
 
     <table border="1" cellpadding="6" cellspacing="0">
@@ -73,3 +71,7 @@
 
 </body>
 </html>
+    </script>
+<!-- </body>
+</html> -->
+

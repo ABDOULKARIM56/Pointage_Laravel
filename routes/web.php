@@ -6,7 +6,26 @@ use App\Http\Controllers\DepartementControllers;
 use App\Http\Controllers\Details;
 use App\Http\Controllers\PermissionControllers;
 use App\Http\Controllers\ServiceControllers;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
+
+
+// Page d'accueil ou formulaire de connexion
+Route::get('/', [EmployeAuthController::class, 'showLoginForm'])->name('login');
+
+// Connexion (POST)
+Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
+
+// Déconnexion (POST)
+Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
+
+// Tableau de bord (route protégée)
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard')
+    ->middleware('auth'); // protège la page par l'auth
+
 
  Route::get('/', function () {
     return view('Auth');
@@ -19,9 +38,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/detail/detail/{detail}/{model}', action: [Details::class, 'show_depart'])->name('detail');
 
 
-// authentification
-Route::post('/employe/authentification', [EmployeAuthController::class, 'authentification'])->name('connexion');
-Route::post('/employe/deconnexion', [EmployeAuthController::class, 'deconnexion'])->name('deconnexion');
 
 // departement
 Route::get('/departement/showdepartement', [DepartementControllers::class, 'index'])->name('show_departement');
@@ -33,6 +49,10 @@ Route::post('/departement/updatedepartement/{id}', [DepartementControllers::clas
 Route::post('/departement/deletedepartement/{id}', [DepartementControllers::class, 'destroy'])->name('suppression_depart');
 
 
+Route::get('/permission/permission', [DashboardController::class, 'index_permission'])->name('permission');
+Route::get('/departement/departement', [DashboardController::class, 'index_departement'])->name('departement');
+Route::get('/conge/conge', [DashboardController::class, 'index_conge'])->name('conge');
+Route::get('/service/service', [DashboardController::class, 'index_service'])->name('service');
 
 // service
 Route::get('/service/showservice', [ServiceControllers::class, 'index'])->name('show_service');
@@ -70,4 +90,10 @@ Route::post('/conge/deleteconge/{id}', [CongeControllers::class, 'destroy'])->na
 //                 @endforeach
 //             </ul>
 //         </div>
+/*<<<<<<< HEAD
 //     @endif
+=======
+//     @endif
+
+
+>>>>>>> 12d747213bbcb0564a9ac74d05774cfba8667eff */

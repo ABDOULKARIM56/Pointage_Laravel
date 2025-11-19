@@ -16,7 +16,10 @@ class CongeControllers extends Controller
             $query->where('type', 'like', '%' . $request->type . '%');
         }
 
-        $conges = $query->get();
+        // $conges = $query->get();
+        $conges = $query->paginate(5);
+
+        
 
         return view('conge.Showconge', compact('conges'));
     }

@@ -10,15 +10,18 @@ class PermissionControllers extends Controller
      //  Afficher la liste des Permissions avec possibilité de recherche
     public function index(Request $request)
     {
+        $mode = $request->get('mode', 'list'); // list par défaut
         $query = Permission::query();
 
         if ($request->has('type') && !empty($request->type)) {
             $query->where('type', 'like', '%' . $request->type . '%');
         }
 
-        $permissions = $query->get();
+        // $permissions = $query->get();
+         $permissions = $query->paginate(5);
 
-        return view('permission.ShowPermission', compact('permissions'));
+        // return view('permission.ShowPermission', compact('permissions'));
+        return view('dashboard.index', compact('permissions','mode'));
     }
 
     //  Afficher le formulaire pour créer un nouveau Permission

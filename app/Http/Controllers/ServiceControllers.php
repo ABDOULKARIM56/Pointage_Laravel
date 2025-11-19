@@ -59,7 +59,7 @@ class ServiceControllers extends Controller
 
         // Récupération des services
         // $services = $query->get();
-        $services = $query->paginate(1);
+        $services = $query->paginate(5);
         // Retour à la vue
         return view('service.showService', compact('services'));
     }
