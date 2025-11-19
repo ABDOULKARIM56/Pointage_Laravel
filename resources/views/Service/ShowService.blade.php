@@ -44,7 +44,9 @@
         }
     </style>
 
+@extends('layouts.app')
 
+@section('content')
     <div class="container bg-light p-4">
         <h2 class="text-center mb-4"style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Services</h2>
 
@@ -139,3 +141,4 @@
     </div>
 
 
+@endsection

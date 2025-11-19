@@ -33,7 +33,9 @@
         }
     </style>
 </head>
+@extends('layouts.app')
 
+@section('content')
     <div class="container bg-light p-4">
 
         <!-- Titre -->
@@ -133,3 +135,4 @@
         });
     </script>
 
+@endsection

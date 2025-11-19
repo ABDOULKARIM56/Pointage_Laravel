@@ -46,7 +46,9 @@
         }
     </style>
 
+@extends('layouts.app')
 
+@section('content')
     <div class="container bg-light p-4">
         <h2 class="mb-4 text-center" style="color:#2196F3; justify-content: center;font-size: 30px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Liste des Congés</h2>
 
@@ -141,3 +143,4 @@
     </div>
 
 
+@endsection

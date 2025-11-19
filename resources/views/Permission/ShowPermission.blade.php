@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
             class="form-control "
             id="searchInput"
         />
-            <!-- c<button type="submit" class="btn btn-primary">Rechercher</button> -->
+          
         </form>
         <form action="{{ route('create_permi') }}" method="GET" class="bg-white p-4 rounded shadow">
             @csrf

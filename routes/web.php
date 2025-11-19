@@ -191,10 +191,6 @@ Route::post('/conge/deleteconge/{id}', [CongeControllers::class, 'destroy'])->na
 //                 @endforeach
 //             </ul>
 //         </div>
-/*<<<<<<< HEAD
-//     @endif
-=======
 //     @endif
 
 
->>>>>>> 54f3c47698fb9e7d3d6121895b2d6822e7fdcbe2
