@@ -17,11 +17,11 @@ class EmployeAuthController extends Controller
     public function authentification(Request $request)
     {
         $employe = new \App\Models\Employe();
-        $employe->nom = 'Kader';
+        $employe->nom = 'Aziz';
         $employe->prenom = 'Abdoul';
         $employe->matricule = 'TMP002';
-        $employe->email = 'kader@example.com';
-        $employe->password = Hash::make('12345678');
+        $employe->email = 'aziz@example.com';
+        $employe->password = Hash::make('1234567890');
         $employe->service_id = 1;
         $employe->nationnalite = 'Nigerien';
         $employe->genre = 'Masculin';
